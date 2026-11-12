@@ -94,6 +94,12 @@ Decisión: Este sprint todo funciona en local. El hosting lo decido en el siguie
 
 Por qué: El objetivo de este sprint es el primer libro guardado en PostgreSQL, y eso no necesita publicarse. Elegir ahora dónde alojar el servidor y la base de datos me frenaría sin aportar nada al objetivo.
 
+## 11. Partir el APP3-001
+
+Decisión: El APP3-001 queda en guardar, recuperar y que el libro siga ahí tras reiniciar el servidor. La validación, los errores y el orden pasan al APP3-002.
+
+Por qué: Montar el proyecto y conectarlo a la base de datos ya llena el día, y prefiero cerrar algo que funcione y esté probado antes que dejar dos cosas a medias.
+
 Riesgo o pendiente:
 - A diferencia de Prevlio, aquí hay que alojar tres cosas: el frontend (puede seguir en GitHub Pages), el servidor de Spring Boot y la base de datos. Las dos últimas no caben en GitHub Pages.
 - Antes de decidir tengo que revisar qué servicios tienen plan gratuito hoy y sus límites: si se duermen cuando nadie los usa, si la base de datos caduca, etc.
