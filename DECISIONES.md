@@ -1,6 +1,16 @@
 ## Fecha: 12/11/2026 12:27
 
-## 1. Estructura del repositorio
+## 1. Arquitectura: opción B
+
+Decisión: Opción B: parte visual (Angular) + servidor propio (Spring Boot) + base de datos (PostgreSQL).
+
+Opciones: A (solo parte visual, con los libros guardados en el navegador) y B (parte visual + servidor + base de datos). Descarto la A.
+
+Por qué: La A no cumple nada nuevo: sería otra app de front, como Prevlio. Quiero al menos una buena aplicación full stack, y para eso Leidario tiene que guardar los libros en mi propio servidor y base de datos.
+
+Riesgo o pendiente: Hay más piezas que montar y conectar. Por eso el tracker ocupa este sprint y el siguiente, en vez de una semana. El objetivo de este sprint es solo el primer libro guardado en PostgreSQL.
+
+## 2. Estructura del repositorio
 
 Decisión: Un solo repositorio con dos carpetas: `frontend` (Angular) y `backend` (Spring Boot).
 
@@ -10,7 +20,7 @@ Por qué: Es una app pequeña de un solo desarrollador. Con un repo, un ticket q
 
 Riesgo o pendiente: El CI tiene que saber qué parte ha cambiado para no compilar las dos en cada push. Lo resuelvo con dos workflows, uno por carpeta.
 
-## 2. Base de datos en local
+## 3. Base de datos en local
 
 Decisión: PostgreSQL en Docker durante el desarrollo.
 
@@ -20,7 +30,7 @@ Por qué: Ya usé Docker en la Formación Dual. Con un archivo de configuración
 
 Riesgo o pendiente: Para la prueba del reinicio, los datos tienen que guardarse en un volumen. Si no, al borrar el contenedor se pierden y la prueba falla aunque el código esté bien.
 
-## 3. Cómo habla Spring Boot con la base de datos
+## 4. Cómo habla Spring Boot con la base de datos
 
 Decisión: Spring Data JPA.
 
@@ -30,7 +40,7 @@ Por qué: JPA es lo más habitual en las ofertas de Spring. Para un CRUD de libr
 
 Riesgo o pendiente: JPA esconde el SQL que ejecuta. Activaré que lo muestre en la consola para ver qué hace por debajo y no programar a ciegas.
 
-## 4. Versión de Java y gestor de proyecto
+## 5. Versión de Java y gestor de proyecto
 
 Decisión: Maven y la versión LTS de Java que proponga Spring Initializr.
 
@@ -40,7 +50,7 @@ Por qué: Maven es lo que vi en las prácticas y sigue siendo lo más común en 
 
 Riesgo o pendiente: Tengo que comprobar en start.spring.io qué versiones de Java y de Spring Boot salen hoy, y que el CI use la misma versión de Java que mi PC.
 
-## 5. Tests del backend
+## 6. Tests del backend
 
 Decisión: Tests de integración con JUnit y MockMvc, contra un PostgreSQL de verdad levantado con Testcontainers.
 
@@ -50,7 +60,7 @@ Por qué: H2 no se comporta exactamente igual que PostgreSQL, y un test que pasa
 
 Riesgo o pendiente: Los tests serán más lentos que con H2. Si la configuración de Testcontainers se come el día del APP3-001, dejo los tests automáticos para el día siguiente y lo apunto aquí.
 
-## 6. Estilos CSS
+## 7. Estilos CSS
 
 Decisión: CSS, igual que en Prevlio.
 
@@ -60,7 +70,7 @@ Por qué: Lo nuevo de esta app es el backend. Prefiero no sumar otra tecnología
 
 Riesgo o pendiente: Los tonos cálidos de papel del brief los defino como variables desde el principio para no repetir valores.
 
-## 7. Renderizado: sin SSR ni SSG
+## 8. Renderizado: sin SSR ni SSG
 
 Decisión: Renderizado en el navegador, sin SSR ni SSG.
 
@@ -70,7 +80,7 @@ Por qué: Leidario es una herramienta personal, no una web de contenido que teng
 
 Riesgo o pendiente: Sin JavaScript la app no funciona. Además, a diferencia de Prevlio, sin conexión con el servidor no hay libros. Tendré que mostrar un aviso claro cuando el servidor no responda.
 
-## 8. Integración de IA en Angular
+## 9. Integración de IA en Angular
 
 Decisión: None, igual que en Prevlio.
 
@@ -78,7 +88,7 @@ Por qué: Sigo con mi propio CLAUDE.md. Ahora tendrá que cubrir las dos partes:
 
 Riesgo o pendiente: El CLAUDE.md tiene que dejar claro qué reglas valen para el frontend, cuáles para el backend y cuáles para los dos.
 
-## 9. Hosting (pendiente, siguiente sprint)
+## 10. Hosting (pendiente, siguiente sprint)
 
 Decisión: Este sprint todo funciona en local. El hosting lo decido en el siguiente sprint.
 
