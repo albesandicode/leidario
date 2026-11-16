@@ -106,6 +106,10 @@ Riesgo o pendiente:
 - Si el frontend y el servidor están en dominios distintos, tengo que configurar CORS en Spring Boot.
 - Sin inicio de sesión, cualquiera con el enlace podría modificar los libros. Tengo que elegir entre una versión de demostración, una contraseña sencilla o publicarla más adelante.
 
+## 12. Guardado como texto en la base de datos
+
+Con enum, un libro solo puede tener uno de los tres estados definidos (QUIERO_LEER, LEYENDO o LEIDO), mientras que con String podría guardarse cualquier valor, como HOLA.
+
 ## Pendiente de decidir (siguiente sprint, al diseñar la pantalla)
 
 - Navegación: ¿una sola pantalla con la cuadrícula y los filtros, o una pantalla aparte para añadir o editar un libro?
