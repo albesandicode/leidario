@@ -110,6 +110,12 @@ Riesgo o pendiente:
 
 Con enum, un libro solo puede tener uno de los tres estados definidos (QUIERO_LEER, LEYENDO o LEIDO), mientras que con String podría guardarse cualquier valor, como HOLA.
 
+## 13. Quitar la comprobación extra
+
+Decisión: La CI espera a PostgreSQL solo con el health check del servicio.
+
+Por qué: GitHub no arranca los pasos hasta que el servicio está sano, así que el paso extra hacía lo mismo. Son menos líneas que mantener y defender.
+
 ## Pendiente de decidir (siguiente sprint, al diseñar la pantalla)
 
 - Navegación: ¿una sola pantalla con la cuadrícula y los filtros, o una pantalla aparte para añadir o editar un libro?
