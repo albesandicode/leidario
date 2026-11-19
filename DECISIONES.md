@@ -116,6 +116,26 @@ Decisión: La CI espera a PostgreSQL solo con el health check del servicio.
 
 Por qué: GitHub no arranca los pasos hasta que el servicio está sano, así que el paso extra hacía lo mismo. Son menos líneas que mantener y defender.
 
+## 14. La primera entrega sale como está y el cambio de carpeta va aparte
+
+Fecha: 19-11 · Cuándo se hace: al principio del sprint 6, antes de la parte visual.
+
+- Qué decidimos: envío la primera entrega a Alex tal como está, y paso el proyecto a su carpeta en una entrega aparte.
+- Alternativas que miramos: cambiar la carpeta dentro de la primera entrega, o no cambiarla.
+- Por qué esta: una entrega pequeña, y la estructura más ordenada, como en los otros proyectos.
+- Qué perdemos con ella: una revisión más, y la primera entrega llega con la carpeta todavía sin ordenar.
+- Cuándo la cambiaríamos: si Alex pide ver la estructura definitiva ya en la primera entrega.
+
+## 15. Docker ahora: la base de datos se arranca con un solo paso
+
+Fecha: 19-11 · Cuándo se hace: al principio del sprint 6, antes de la parte visual.
+
+- Qué decidimos: quien descargue el proyecto arranca la base de datos con un solo paso, sin instalar nada más.
+- Alternativas que miramos: instalar la base de datos en el ordenador, o tenerla en internet.
+- Por qué esta: ya he visto Docker y lo piden muchas ofertas.
+- Qué perdemos con ella: hay que tener Docker instalado y abierto, y gasta memoria del ordenador.
+- Cuándo la cambiaríamos: si Docker diera problemas que me impidieran trabajar.
+
 ## Pendiente de decidir (siguiente sprint, al diseñar la pantalla)
 
 - Navegación: ¿una sola pantalla con la cuadrícula y los filtros, o una pantalla aparte para añadir o editar un libro?
