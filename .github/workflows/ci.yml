@@ -3,12 +3,14 @@ name: CI
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
+  pull_request:          # sin filtro: se ejecuta en cualquier PR, sea cual sea su base
 
 jobs:
   backend:
     runs-on: ubuntu-latest
+    defaults:            # valores por defecto para todo el job
+      run:
+        working-directory: backend   # todos los run: de este job arrancan en backend/
 
     services:
       postgres:
