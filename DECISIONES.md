@@ -136,6 +136,13 @@ Fecha: 19-11 · Cuándo se hace: al principio del sprint 6, antes de la parte vi
 - Qué perdemos con ella: hay que tener Docker instalado y abierto, y gasta memoria del ordenador.
 - Cuándo la cambiaríamos: si Docker diera problemas que me impidieran trabajar.
 
+## 16 · PostgreSQL del contenedor en el puerto 5433 · 24-11-2026
+- Qué decidimos: el contenedor de PostgreSQL usa el 5433 de mi PC (`5433:5432`), también en la CI.
+- Alternativas que miramos: A) parar el servicio de PostgreSQL de Windows; C) desinstalarlo.
+- Por qué esta: Porque de otra manera se solaparían los puertos con proyectos que tengo con amigos.
+- Qué perdemos con ella: el 5433 no es el puerto habitual de PostgreSQL; queda explicado en el README.
+- Cuándo la cambiaríamos: Cuando no tuviera proyectos paralelos. 
+
 ## Pendiente de decidir (siguiente sprint, al diseñar la pantalla)
 
 - Navegación: ¿una sola pantalla con la cuadrícula y los filtros, o una pantalla aparte para añadir o editar un libro?

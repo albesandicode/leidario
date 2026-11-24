@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: leidario
+      POSTGRES_USER: postgres
+      # Se lee de la variable de entorno DB_PASSWORD; si no existe, compose se detiene con este mensaje
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Define la variable de entorno DB_PASSWORD}
+    ports:
+      - "5433:5432"   # 5433 en tu equipo -> 5432 dentro del contenedor
+    volumes:
+      - leidario-data:/var/lib/postgresql/data
+
+volumes:
+  leidario-data:
