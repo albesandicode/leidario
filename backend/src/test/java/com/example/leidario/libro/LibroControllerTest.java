@@ -41,7 +41,7 @@ class LibroControllerTest {
 				  "autor": "Patrick Rothfuss",
 				  "estado": "LEIDO",
 				  "fechaFin": "2026-11-10",
-				  "nota": 9,
+				  "nota": 5,
 				  "comentario": "Muy bueno."
 				}
 				""";
@@ -55,7 +55,7 @@ class LibroControllerTest {
 				.andExpect(jsonPath("$.autor").value("Patrick Rothfuss"))
 				.andExpect(jsonPath("$.estado").value("LEIDO"))
 				.andExpect(jsonPath("$.fechaFin").value("2026-11-10"))
-				.andExpect(jsonPath("$.nota").value(9))
+				.andExpect(jsonPath("$.nota").value(5))
 				.andExpect(jsonPath("$.comentario").value("Muy bueno."));
 
 		// El controlador pasa al servicio el libro con los datos del JSON
@@ -66,7 +66,7 @@ class LibroControllerTest {
 		assertThat(recibido.getAutor()).isEqualTo("Patrick Rothfuss");
 		assertThat(recibido.getEstado()).isEqualTo(EstadoLibro.LEIDO);
 		assertThat(recibido.getFechaFin()).isEqualTo(LocalDate.of(2026, 11, 10));
-		assertThat(recibido.getNota()).isEqualTo(9);
+		assertThat(recibido.getNota()).isEqualTo(5);
 		assertThat(recibido.getComentario()).isEqualTo("Muy bueno.");
 	}
 
@@ -82,7 +82,7 @@ class LibroControllerTest {
 				.andExpect(jsonPath("$[0].autor").value("Patrick Rothfuss"))
 				.andExpect(jsonPath("$[0].estado").value("LEIDO"))
 				.andExpect(jsonPath("$[0].fechaFin").value("2026-11-10"))
-				.andExpect(jsonPath("$[0].nota").value(9))
+				.andExpect(jsonPath("$[0].nota").value(5))
 				.andExpect(jsonPath("$[0].comentario").value("Muy bueno."));
 	}
 
@@ -94,7 +94,7 @@ class LibroControllerTest {
 		libro.setAutor("Patrick Rothfuss");
 		libro.setEstado(EstadoLibro.LEIDO);
 		libro.setFechaFin(LocalDate.of(2026, 11, 10));
-		libro.setNota(9);
+		libro.setNota(5);
 		libro.setComentario("Muy bueno.");
 		return libro;
 	}
