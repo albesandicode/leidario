@@ -2,6 +2,7 @@ package com.example.leidario.libro;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -86,6 +87,65 @@ class LibroControllerTest {
 				.andExpect(jsonPath("$[0].comentario").value("Muy bueno."));
 	}
 
+	@Test
+	void postSinTituloDevuelve400YNoGuarda() throws Exception {
+		String json = """
+				{
+				  "autor": "Patrick Rothfuss",
+				  "estado": "LEIDO",
+				  "nota": 5
+				}
+				""";
+
+		mockMvc.perform(post("/api/libros")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.mensaje").value("Un libro no puede ir sin título"));
+
+		verify(libroService, never()).guardar(any(Libro.class));
+	}
+
+	@Test
+	void postConNota7Devuelve400YNoGuarda() throws Exception {
+		String json = """
+				{
+				  "titulo": "El nombre del viento",
+				  "estado": "LEIDO",
+				  "nota": 7
+				}
+				""";
+
+		mockMvc.perform(post("/api/libros")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.mensaje").value("La nota debe estar entre 1 y 5"));
+
+		verify(libroService, never()).guardar(any(Libro.class));
+	}
+
+	@Test
+	void postConLibroValidoLoGuarda() throws Exception {
+		when(libroService.guardar(any(Libro.class))).thenReturn(libroDePrueba());
+
+		String json = """
+				{
+				  "titulo": "El nombre del viento",
+				  "estado": "LEIDO",
+				  "nota": 5
+				}
+				""";
+
+		mockMvc.perform(post("/api/libros")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.titulo").value("El nombre del viento"));
+
+		verify(libroService).guardar(any(Libro.class));
+	}
+
 	private Libro libroDePrueba() {
 		Libro libro = new Libro();
 		// Libro no tiene setId (el id lo pone la base de datos), así que se asigna por reflexión
@@ -97,5 +157,42 @@ class LibroControllerTest {
 		libro.setNota(5);
 		libro.setComentario("Muy bueno.");
 		return libro;
+	}
+
+	@Test
+	void postSinEstadoDevuelve400YNoGuarda() throws Exception {
+		String json = """
+				{
+				  "titulo": "El nombre del viento",
+				  "nota": 5
+				}
+				""";
+
+		mockMvc.perform(post("/api/libros")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.mensaje").value("Un libro no puede ir sin estado"));
+
+		verify(libroService, never()).guardar(any(Libro.class));
+	}
+
+	@Test
+	void postConEspaciosEnElTituloDevuelve400YNoGuarda() throws Exception {
+		String json = """
+				{
+				  "titulo": " ",
+				  "estado": "LEIDO",
+				  "nota": 5
+				}
+				""";
+
+		mockMvc.perform(post("/api/libros")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.mensaje").value("Un libro no puede ir sin título"));
+
+		verify(libroService, never()).guardar(any(Libro.class));
 	}
 }
