@@ -1,6 +1,7 @@
 package com.example.leidario.libro;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -144,6 +145,33 @@ class LibroControllerTest {
 				.andExpect(jsonPath("$.titulo").value("El nombre del viento"));
 
 		verify(libroService).guardar(any(Libro.class));
+	}
+
+	@Test
+	void getDevuelveLosLibrosOrdenadosPorEstadoYFecha() throws Exception {
+		// El servicio los devuelve por id (A..G); el controlador debe ordenarlos
+		when(libroService.listar()).thenReturn(List.of(
+				libro(1L, "A", EstadoLibro.LEIDO, LocalDate.of(2026, 3, 10)),
+				libro(2L, "B", EstadoLibro.QUIERO_LEER, null),
+				libro(3L, "C", EstadoLibro.LEYENDO, null),
+				libro(4L, "D", EstadoLibro.LEIDO, null),
+				libro(5L, "E", EstadoLibro.QUIERO_LEER, null),
+				libro(6L, "F", EstadoLibro.LEIDO, LocalDate.of(2026, 10, 1)),
+				libro(7L, "G", EstadoLibro.LEYENDO, null)));
+
+		mockMvc.perform(get("/api/libros"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[*].titulo").value(
+						contains("C", "G", "F", "A", "D", "E", "B")));
+	}
+
+	private Libro libro(Long id, String titulo, EstadoLibro estado, LocalDate fechaFin) {
+		Libro libro = new Libro();
+		ReflectionTestUtils.setField(libro, "id", id);
+		libro.setTitulo(titulo);
+		libro.setEstado(estado);
+		libro.setFechaFin(fechaFin);
+		return libro;
 	}
 
 	private Libro libroDePrueba() {
