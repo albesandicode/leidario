@@ -143,6 +143,18 @@ Fecha: 19-11 · Cuándo se hace: al principio del sprint 6, antes de la parte vi
 - Qué perdemos con ella: el 5433 no es el puerto habitual de PostgreSQL; queda explicado en el README.
 - Cuándo la cambiaríamos: Cuando no tuviera proyectos paralelos. 
 
+## 17 · Un solo mensaje de error por petición · 26-11-2026
+- Qué decidimos: si un libro tiene varios datos mal, el servidor devuelve un solo mensaje, el del primer fallo, en el orden título, estado, nota.
+- Alternativas que miramos: devolver todos los fallos a la vez.
+- Por qué esta: hoy no hay parte visual y la respuesta es más simple; cuando haga el formulario en Angular, validará antes de enviar, así que casi nunca se verá este error.
+- Qué perdemos con ella: si hay varios fallos, hay que corregirlos de uno en uno, mientras que la mayoría de formularios los marcan todos a la vez.
+- Cuándo la cambiaríamos: en el sprint 7, al hacer el formulario, si veo que hace falta mostrar todos los fallos a la vez.
+
+## 18 · El orden de los libros se queda en el controlador por ahora · 27-11-2026
+- Qué decidimos: la PR sale hoy con el orden en `LibroController`, y el lunes abro un ticket para el sprint 7 para moverlo a `LibroService` con su test.
+- Por qué: el orden ya funciona y está probado (9/0/0/0), y moverlo hoy supone hacer con prisa un test de servicio, que es algo nuevo para mí. Lo habitual es que esté en el servicio, así que queda apuntado como deuda técnica. 
+- Quién lo decidió: Sandi, porque yo no sabía qué opción elegir.
+
 ## Pendiente de decidir (siguiente sprint, al diseñar la pantalla)
 
 - Navegación: ¿una sola pantalla con la cuadrícula y los filtros, o una pantalla aparte para añadir o editar un libro?
